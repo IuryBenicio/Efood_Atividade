@@ -2,11 +2,7 @@ import Logo from '../../../assets/images/logo.svg'
 import { HeaderContainer, TextHeader } from './styles'
 import { useNavigate } from 'react-router-dom'
 
-type Props = {
-  Cart: number
-}
-
-const HeaderCart = ({Cart}: Props) => {
+const HeaderCart = () => {
   const navigate = useNavigate();
 
   const NavigateHome = ()=>{
@@ -20,7 +16,7 @@ const HeaderCart = ({Cart}: Props) => {
           Restaurantes
         </TextHeader>
         <img onClick={()=>NavigateHome()} src={Logo} alt="efood" />
-        <TextHeader>{Cart} produto(s) no carrinho </TextHeader>
+        <TextHeader>0 produto(s) no carrinho </TextHeader>
       </div>
     </HeaderContainer>
   )
