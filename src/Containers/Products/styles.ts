@@ -38,6 +38,9 @@ export const SaibaMais = styled.a`
   color: ${Cores.corFonteWhite1};
   background-color: ${Cores.corFonte1};
   padding: 4px 6px;
+  font-weight: 700;
+  font-size: 14px;
+  text-align: center;
 `
 
 export const ContainerTexT = styled.div`
