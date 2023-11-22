@@ -20,6 +20,7 @@ export const ProductContainer = styled.section`
     display: inline-block;
       .imgContainer{
         position: relative;
+        height: 217px;
       }
       p{
         padding: 16px 0;
@@ -45,6 +46,7 @@ export const ContainerTexT = styled.div`
   border-left: 1px solid ${Cores.corFonte1};
   background-color: #FFF;
   padding: 8px;
+  white-space: ;
   p{
     padding: 16px 0;
     font-size: 14px;
@@ -53,6 +55,7 @@ export const ContainerTexT = styled.div`
     color: ${Cores.corFonte1};
   }
 `
+
 export const TitleStars = styled.div`
   .stars{
     display: flex;
@@ -68,8 +71,6 @@ export const TitleStars = styled.div`
 `
 
 export const ProductImg = styled.img`
-  max-width: 472px;
   width: 100%;
-  max-height: 217px;
   height: 100%;
 `

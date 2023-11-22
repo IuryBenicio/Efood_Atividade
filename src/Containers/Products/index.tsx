@@ -32,6 +32,6 @@ const Products = ()=>{
         </ul>
       </div>
     </ProductContainer>
-)
+  )
 }
 export default Products
