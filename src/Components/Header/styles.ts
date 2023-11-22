@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import backgroundImg from '../../assets/images/Vector.svg'
+import { Cores } from "../../styles";
 
 export const HeaderContainer = styled.header`
   width: 100vw;
@@ -9,13 +10,13 @@ export const HeaderContainer = styled.header`
   }
   text-align: center;
   background-image: url(${backgroundImg});
-  height: 384px;
+  padding: 40px;
   img{
-    margin-top: 64px;
+
   }
   h2{
     margin-top: 138.5px;
-    color: #E66767;
+    color: ${Cores.corFonte1};
     text-align: center;
     font-family: Roboto;
     font-size: 36px;

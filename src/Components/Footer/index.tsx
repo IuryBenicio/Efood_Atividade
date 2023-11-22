@@ -8,7 +8,7 @@ const Footer = ()=>{
   return (
     <FooterSection>
       <FContainer>
-        <img src={Logo} alt='efood' />
+        <img className="imgNome" src={Logo} alt='efood' />
         <SocialMedia>
           <img src={Instagram} alt="Instagram" />
           <img src={Facebook} alt="Facebook" />

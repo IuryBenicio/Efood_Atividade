@@ -3,12 +3,16 @@ import { Cores } from "../../styles";
 
 export const FooterSection = styled.footer`
   width: 100vw;
-  padding: 40px;
+  padding: 40px 0;
   background-color: ${Cores.backgroundFooter};
 `
 
 export const SocialMedia = styled.div`
-  margin-top: 32.5px;
+  height: auto;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
   img{
     margin: 0 4px;
   }
