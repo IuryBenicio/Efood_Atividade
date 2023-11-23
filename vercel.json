@@ -1,0 +1,5 @@
+{
+  "rewrites":  [
+    {"source": "/Perfil", "destination": "/Perfil"}
+  ]
+}

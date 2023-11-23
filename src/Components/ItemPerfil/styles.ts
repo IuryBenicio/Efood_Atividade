@@ -3,7 +3,7 @@ import { Cores } from "../../styles";
 
 export const ItemCardapio = styled.div`
   width: 320px;
-  height: 338px;
+  height: auto;
   background: ${Cores.corFonte1};
   .cardapio_content{
     padding: 8px;
@@ -25,6 +25,7 @@ export const ItemCardapio = styled.div`
       line-height: 22px;
     }
     button{
+      padding: 4px 0;
       border: none;
       width: 100%;
       text-align: center;
