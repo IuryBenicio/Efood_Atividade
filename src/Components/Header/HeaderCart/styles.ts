@@ -5,8 +5,6 @@ import { Cores } from "../../../styles";
 export const HeaderContainer = styled.header`
   width: 100vw;
   .container{
-    img{
-    }
     display: flex;
     justify-content: space-between;
     align-self: center;
@@ -17,7 +15,10 @@ export const HeaderContainer = styled.header`
   padding: 64px ;
   color: ${Cores.corFonte1};
 `
+
 export const TextHeader = styled.a`
+  text-align: start;
+  width: 197px;
   font-family: Roboto;
   font-size: 18px;
   font-weight: 900;
