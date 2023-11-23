@@ -1,5 +1,5 @@
 import Item from "../../Components/ItemPerfil"
-import { ItensContainer } from "./styles"
+import { ItensContainer,  } from "./styles"
 import PizzaMarguerita from '../../assets/images/Itens/Pizza_Marguerita.svg'
 
 const Itens = ()=>{
