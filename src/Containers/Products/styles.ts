@@ -37,6 +37,7 @@ export const SaibaMais = styled.a`
   display: inline-block;
   color: ${Cores.corFonteWhite1};
   background-color: ${Cores.corFonte1};
+  height: 24px;
   padding: 4px 6px;
   font-weight: 700;
   font-size: 14px;
@@ -49,7 +50,6 @@ export const ContainerTexT = styled.div`
   border-left: 1px solid ${Cores.corFonte1};
   background-color: #FFF;
   padding: 8px;
-  white-space: ;
   p{
     padding: 16px 0;
     font-size: 14px;
@@ -64,6 +64,10 @@ export const TitleStars = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+  h3{
+    font-size: 18px;
+    font-weight: 700;
   }
   display: flex;
   text-align: center;
