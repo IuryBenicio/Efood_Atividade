@@ -80,4 +80,7 @@ export const TitleStars = styled.div`
 export const ProductImg = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: cover;
 `
+
+310

@@ -6,6 +6,11 @@ export const ItemCardapio = styled.div`
   height: auto;
   background: ${Cores.corFonte1};
   .cardapio_content{
+    .item_container{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
     padding: 8px;
     img{
       width: 304px;

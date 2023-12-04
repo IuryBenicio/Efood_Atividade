@@ -1,11 +1,17 @@
 import { ImgContainer } from "./styles"
 
-const BannerMenu = ()=>(
-  <ImgContainer>
+type Props = {
+  capa: string
+  titulo: string
+  tipo: string
+}
+
+const BannerMenu = ({capa, titulo, tipo}: Props)=>(
+  <ImgContainer background={capa}>
     <div className="text">
       <div className="container">
-        <span>Italiana</span>
-        <h2>La Dolce Vita Trattoria</h2>
+        <span>{tipo}</span>
+        <h2>{titulo}</h2>
       </div>
     </div>
   </ImgContainer>
