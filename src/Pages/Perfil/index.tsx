@@ -22,7 +22,7 @@ function Perfil(){
   const [Restaurante, setRestaurante] = useState<ItemProps[]>([])
   const [cardapio, setCardapio] = useState<CardapioType[]>([])
   const [Selecionado, setSelecionado] = useState(false)
-  const [ItemModal, setItemModal] = useState<CardapioType>([])
+  const [ItemModal, setItemModal] = useState<CardapioType[]>([])
 
   const selecionar = (e: CardapioType)=>{
       setSelecionado(true)
@@ -32,22 +32,21 @@ function Perfil(){
 
 /////////////////////////REQUISIÇÕES/////////////////////////
   async function getItems(){
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const response =
     await fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
     .then(res => res.json())
     // .then(res => console.log(res.cardapio))
     .then(res => setRestaurante(res))
     // .then(()=>console.log(cardapio))
-    return
+    return response
   }
 
   async function getCardapio(){
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const response =
     await fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
     .then(res => res.json())
     .then(res => setCardapio(res.cardapio))
+    return response
   }
 
   useEffect(()=>{
