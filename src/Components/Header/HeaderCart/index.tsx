@@ -2,6 +2,8 @@ import Logo from '../../../assets/images/logo.svg'
 import { HeaderContainer, TextHeader } from './styles'
 import { useNavigate } from 'react-router-dom'
 
+
+
 const HeaderCart = () => {
   const navigate = useNavigate();
 
@@ -12,7 +14,7 @@ const HeaderCart = () => {
   return(
     <HeaderContainer>
       <div className="container">
-        <TextHeader>
+        <TextHeader onClick={()=>NavigateHome()}>
           Restaurantes
         </TextHeader>
         <img onClick={()=>NavigateHome()} src={Logo} alt="efood" />

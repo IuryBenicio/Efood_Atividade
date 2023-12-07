@@ -17,6 +17,7 @@ export const HeaderContainer = styled.header`
 `
 
 export const TextHeader = styled.a`
+  cursor: pointer;
   text-align: start;
   width: 197px;
   font-family: Roboto;

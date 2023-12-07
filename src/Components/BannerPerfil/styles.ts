@@ -1,8 +1,11 @@
 import styled from "styled-components";
-import Banner from '../..//assets/images/BanneerImg.png'
 
-export const ImgContainer = styled.div`
-  background-image: url(${Banner});
+type Props = {
+  background: string
+}
+
+export const ImgContainer = styled.div<Props>`
+  background-image: url(${(Props)=> Props.background});
   background-repeat: no-repeat;
   background-size: cover;
   width: 100vw;
