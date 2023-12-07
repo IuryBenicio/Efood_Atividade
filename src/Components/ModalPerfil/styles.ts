@@ -2,12 +2,15 @@ import styled from "styled-components";
 import { Cores } from "../../styles";
 
 export const CloseImg = styled.img`
+  cursor: pointer;
   position: absolute;
   z-index: 2;
-  top: 8;
-  left: 8;
+  top: 0;
+  right: 0;
   width: 16px;
   height: 16px;
+  margin-right: 8px;
+  margin-top: 8px;
 `
 
 export const ModalContainer = styled.div`
@@ -32,11 +35,17 @@ export const ContentContainer = styled.div`
       object-fit: cover;
     }
     .text{
-      height: 176px;
       .description{
+        height: 176px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        p{
+        color: ${Cores.corFonteWhite1};
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 22px;
+      }
       }
       h3{
         color: ${Cores.corFonteWhite1};
@@ -44,12 +53,7 @@ export const ContentContainer = styled.div`
         font-weight: 900;
         margin-bottom: 16px;
       }
-      p{
-        color: ${Cores.corFonteWhite1};
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 22px;
-      }
+
       button{
         padding: 4px 7px ;
         background-color: ${Cores.corFonteWhite1};

@@ -7,14 +7,23 @@ export const ItemCardapio = styled.div`
   background: ${Cores.corFonte1};
   .cardapio_content{
     .item_container{
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      a{
+        cursor: pointer;
+        font-weight: bold;
+      }
+      a:hover{
+        color: black;
+      }
     }
     padding: 8px;
     img{
       width: 304px;
       height: 167px;
+      object-fit: cover;
     }
     h3{
       color: ${Cores.corFonteWhite1};

@@ -4,13 +4,14 @@ export type Props = {
   titulo: string
   descricao: string
   foto: string
+  clicou: ()=> void
 }
 
 const Item = ({titulo, foto, descricao, clicou}: Props)=>{
 
   const getDescricao = (descricao: string) =>{
     if(descricao.length > 95) {
-      return descricao.slice (0, 215)
+      return descricao.slice (0, 248)
     }
     return descricao
   }
@@ -19,10 +20,10 @@ const Item = ({titulo, foto, descricao, clicou}: Props)=>{
     <>
       <ItemCardapio>
         <div className="cardapio_content">
-          <div className="item_container">
+          <div onClick={clicou} className="item_container">
             <img src={foto} alt={titulo} />
             <h3>{titulo}</h3>
-            <p>{getDescricao(descricao)} <a onClick={clicou}>VER MAIS ...</a></p>
+            <p>{getDescricao(descricao)} <a onClick={clicou}> ... ver mais</a></p>
           </div>
           <button>Adicionar ao carrinho</button>
         </div>
