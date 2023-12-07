@@ -35,9 +35,7 @@ function Perfil(){
     const response =
     await fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
     .then(res => res.json())
-    // .then(res => console.log(res.cardapio))
     .then(res => setRestaurante(res))
-    // .then(()=>console.log(cardapio))
     return response
   }
 
