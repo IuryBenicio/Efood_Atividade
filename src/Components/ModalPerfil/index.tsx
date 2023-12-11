@@ -4,9 +4,10 @@ import { CardapioType } from "../../Pages/Perfil"
 
 interface Props extends CardapioType{
   clicou: ()=> void
+  Cardapio: CardapioType
 }
 
-const ModalPerfil = ({foto, descricao, nome, porcao, preco, clicou}: Props)=>{
+const ModalPerfil = ({Cardapio, clicou}: Props)=>{
 
   const getPreco = (preco: number)=> {
     return new Intl.NumberFormat('pt-BR', {
@@ -20,14 +21,14 @@ const ModalPerfil = ({foto, descricao, nome, porcao, preco, clicou}: Props)=>{
       <ContentContainer>
         <CloseImg src={Close} alt="Clique para fechar" onClick={clicou} />
         <div className="containerModal">
-          <img src={foto} alt="" />
+          <img src={Cardapio.foto} alt="" />
           <div className="text">
-            <h3>{nome}</h3>
+            <h3>{Cardapio.nome}</h3>
             <div className="description">
-              <p>{descricao}</p>
-              <p>Serve: {porcao}</p>
+              <p>{Cardapio.descricao}</p>
+              <p>Serve: {Cardapio.porcao}</p>
             </div>
-            <button>Adicionar ao carrinho - {getPreco(preco)}</button>
+            <button>Adicionar ao carrinho - {getPreco(Cardapio.preco)}</button>
           </div>
         </div>
       </ContentContainer>

@@ -12,7 +12,7 @@ export const HeaderContainer = styled.header`
   background-image: url(${backgroundImg});
   padding: 40px;
   img{
-
+    cursor: pointer;
   }
   h2{
     margin-top: 138.5px;

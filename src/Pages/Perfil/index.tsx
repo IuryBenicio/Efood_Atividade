@@ -19,7 +19,7 @@ export interface CardapioType {
 
 function Perfil(){
   const { id } = useParams()
-  const [Restaurante, setRestaurante] = useState<ItemProps[]>([])
+  const [restaurante, setRestaurante] = useState<ItemProps[]>([])
   const [cardapio, setCardapio] = useState<CardapioType[]>([])
   const [Selecionado, setSelecionado] = useState(false)
   const [ItemModal, setItemModal] = useState<CardapioType[]>([])
@@ -55,13 +55,13 @@ function Perfil(){
   return(
     <PerfilContainer>
       <HeaderCart />
-      <BannerMenu capa={Restaurante.capa} tipo={Restaurante.tipo} titulo={Restaurante.titulo}/>
+        <BannerMenu Cardapio={restaurante}/>
       <ItensContainer className="container">
         {cardapio.map((e)=>(
           <Item key={e.id} titulo={e.nome} foto={e.foto} descricao={e.descricao} clicou={() => selecionar(e)}/>
         ))}
       </ItensContainer>
-      {Selecionado && (<ModalPerfil nome={ItemModal.nome} descricao={ItemModal.descricao} foto={ItemModal.foto} preco={ItemModal.preco} porcao={ItemModal.porcao} clicou={()=> setSelecionado(false)}/>)}
+      {Selecionado && (<ModalPerfil Cardapio={ItemModal} clicou={()=> setSelecionado(false)}/>)}
       <Footer />
     </PerfilContainer>
   )

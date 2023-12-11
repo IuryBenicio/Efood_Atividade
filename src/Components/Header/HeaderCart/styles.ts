@@ -10,6 +10,9 @@ export const HeaderContainer = styled.header`
     align-self: center;
     align-items: center;
     text-align: center;
+    img{
+      cursor: pointer;
+    }
   }
   background-image: url(${backgroundImg});
   padding: 64px ;

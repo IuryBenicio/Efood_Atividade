@@ -8,12 +8,12 @@ import { ProductContainer } from "./styles"
 export type Item = {
   id: number
   titulo: string
-  destacado: boolean
+  destacado?: boolean
   tipo: string
   avaliacao: number
   descricao: string
   capa: string
-  cardapio: [
+  cardapio?: [
       {
       foto: string
       preco: number
