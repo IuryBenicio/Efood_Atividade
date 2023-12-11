@@ -4,6 +4,7 @@ import Footer from "../../Components/Footer"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { ProductContainer } from "./styles"
+import { CardapioType } from "../Perfil"
 
 export type Item = {
   id: number
@@ -13,16 +14,7 @@ export type Item = {
   avaliacao: number
   descricao: string
   capa: string
-  cardapio?: [
-      {
-      foto: string
-      preco: number
-      id: number
-      nome: string
-      descricao: string
-      porcao: string
-    }
-  ]
+  cardapio?: CardapioType[]
 }
 
 function Home(){
