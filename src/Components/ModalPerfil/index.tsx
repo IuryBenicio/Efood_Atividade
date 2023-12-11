@@ -2,7 +2,7 @@ import { ModalContainer, ContentContainer, CloseImg } from "./styles"
 import Close from '../../assets/images/Itens/close 1 (1).png'
 import { CardapioType } from "../../Pages/Perfil"
 
-interface Props extends CardapioType{
+type Props = {
   clicou: ()=> void
   Cardapio: CardapioType
 }

@@ -8,21 +8,21 @@ import { useState, useEffect } from 'react'
 import { Item as ItemProps } from "../Home";
 import Item from "../../Components/ItemPerfil";
 
-export interface CardapioType {
+export type CardapioType = {
   foto: string
   preco: number
   id?: number
   nome: string
   descricao: string
-  porcao: string
+  porcao?: string
 }
 
 function Perfil(){
   const { id } = useParams()
-  const [restaurante, setRestaurante] = useState<ItemProps[]>([])
+  const [restaurante, setRestaurante] = useState<ItemProps>([])
   const [cardapio, setCardapio] = useState<CardapioType[]>([])
   const [Selecionado, setSelecionado] = useState(false)
-  const [ItemModal, setItemModal] = useState<CardapioType[]>([])
+  const [ItemModal, setItemModal] = useState<CardapioType>([])
 
   const selecionar = (e: CardapioType)=>{
       setSelecionado(true)
