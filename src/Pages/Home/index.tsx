@@ -22,12 +22,11 @@ function Home(){
   const [itens, setItens] = useState<Item[]>([])
 
   async function getItems(){
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const response =
     await fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
     .then(res => res.json())
     .then(res => setItens(res))
-    return
+    return response
   }
 
   useEffect(()=>{
