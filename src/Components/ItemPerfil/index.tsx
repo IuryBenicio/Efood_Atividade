@@ -12,7 +12,7 @@ const Item = ({foto, nome, descricao, clicou}: Props)=>{
 
   const getDescricao = (descricao: string) =>{
     if(descricao.length > 95) {
-      return descricao.slice (0, 248)
+      return descricao.slice (0, 165)
     }
     return descricao
   }

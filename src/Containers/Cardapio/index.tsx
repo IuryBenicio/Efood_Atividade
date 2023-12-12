@@ -1,6 +1,5 @@
 import { ItensContainer as ItensContainerStyles } from "./styles"
 import Item from "../../Components/ItemPerfil"
-// import { useEffect } from "react"
 
 export type CardapioType = {
   foto: string
@@ -17,10 +16,6 @@ type Props = {
 }
 
 const ItensContainer = ({listaItens, clicou}: Props)=>{
-
-  // useEffect(()=>{
-  //   console.log(listaItens)
-  // },[listaItens])
 
   return(
     <ItensContainerStyles  className="container">
