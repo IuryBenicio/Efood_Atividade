@@ -4,10 +4,12 @@ import Footer from "../../Components/Footer"
 import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { ProductContainer } from "./styles"
-import { CardapioType } from "../Perfil"
+import { CardapioType } from "../../Containers/Cardapio"
+import { Carregando } from "../../styles"
+import logo from '../../assets/images/logo.svg'
 
 export type Item = {
-  id: number
+  id?: number
   titulo: string
   destacado?: boolean
   tipo: string
@@ -33,29 +35,39 @@ function Home(){
     getItems()
   },[])
 
-  return(
-    <>
-      <Header/>
-      <ProductContainer>
-        <div className="container">
-          <ul>
-              {itens.map(e=>(
-                <li key={e.id} onClick={()=> navigate(`/Perfil/${e.id}`)}>
-                    <Restaurante
-                    avaliacao={e.avaliacao}
-                    capa={e.capa}
-                    descricao={e.descricao}
-                    tipo={e.tipo}
-                    titulo={e.titulo}
-                    destacado={e.destacado}/>
-                </li>
-              ))}
-          </ul>
-        </div>
-      </ProductContainer>
-      <Footer/>
-    </>
-  )
+  if(itens.length <= 0){
+    return(
+      <Carregando>
+        <img src={logo} alt="efood" />
+        <h2>CARREGANDO ...</h2>
+      </Carregando>
+    )
+  }
+    else{
+      return(
+        <>
+          <Header/>
+          <ProductContainer>
+            <div className="container">
+              <ul>
+                  {itens.map(e=>(
+                    <li key={e.id} onClick={()=> navigate(`/Perfil/${e.id}`)}>
+                        <Restaurante
+                        avaliacao={e.avaliacao}
+                        capa={e.capa}
+                        descricao={e.descricao}
+                        tipo={e.tipo}
+                        titulo={e.titulo}
+                        destacado={e.destacado}/>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </ProductContainer>
+          <Footer/>
+        </>
+      )
+    }
 }
 
 export default Home

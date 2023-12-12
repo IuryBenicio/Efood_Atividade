@@ -1,15 +1,18 @@
 import { ModalContainer, ContentContainer, CloseImg } from "./styles"
 import Close from '../../assets/images/Itens/close 1 (1).png'
-import { CardapioType } from "../../Pages/Perfil"
 
 type Props = {
   clicou: ()=> void
-  Cardapio: CardapioType
+  foto?: string
+  nome?: string
+  descricao?: string
+  porcao?: string
+  preco?: number
 }
 
-const ModalPerfil = ({Cardapio, clicou}: Props)=>{
+const ModalPerfil = ({foto, descricao, nome, porcao, preco, clicou}: Props)=>{
 
-  const getPreco = (preco: number)=> {
+  const getPreco = (preco?: number)=> {
     return new Intl.NumberFormat('pt-BR', {
       style: 'currency',
       currency: 'BRL'
@@ -21,14 +24,14 @@ const ModalPerfil = ({Cardapio, clicou}: Props)=>{
       <ContentContainer>
         <CloseImg src={Close} alt="Clique para fechar" onClick={clicou} />
         <div className="containerModal">
-          <img src={Cardapio.foto} alt="" />
+          <img src={foto} alt="" />
           <div className="text">
-            <h3>{Cardapio.nome}</h3>
+            <h3>{nome}</h3>
             <div className="description">
-              <p>{Cardapio.descricao}</p>
-              <p>Serve: {Cardapio.porcao}</p>
+              <p>{descricao}</p>
+              <p>Serve: {porcao}</p>
             </div>
-            <button>Adicionar ao carrinho - {getPreco(Cardapio.preco)}</button>
+            <button>Adicionar ao carrinho - {getPreco(preco)}</button>
           </div>
         </div>
       </ContentContainer>

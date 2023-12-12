@@ -1,16 +1,16 @@
-import { Item as ItemProps } from "../../Pages/Home";
 import { ImgContainer } from "./styles"
+import { Item as ItemProps } from "../../Pages/Home"
 
 type Props = {
-  Cardapio: ItemProps
+  banner: ItemProps[]
 }
 
-const BannerMenu = ({Cardapio}: Props)=>(
-  <ImgContainer background={Cardapio.capa}>
+const BannerMenu = ({banner}: Props)=>(
+  <ImgContainer background={banner.capa}>
     <div className="text">
       <div className="container">
-        <span>{Cardapio.tipo}</span>
-        <h2>{Cardapio.titulo}</h2>
+        <span>{banner.tipo}</span>
+        <h2>{banner.titulo}</h2>
       </div>
     </div>
   </ImgContainer>

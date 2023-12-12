@@ -1,4 +1,17 @@
 import { createGlobalStyle } from "styled-components";
+import styled from "styled-components";
+
+export const Carregando = styled.h2`
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  img{
+    margin-bottom: 8px;
+  }
+`
 
 export const Cores = {
   background: '#FFF8F2',
