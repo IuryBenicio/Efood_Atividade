@@ -8,10 +8,11 @@ import { Carregando } from "../../styles";
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react'
 import { Item as ItemProps } from "../Home";
+import logo from '../../assets/images/logo.svg'
 
 function Perfil(){
   const { id } = useParams()
-  const [restaurante, setRestaurante] = useState<ItemProps[]>([])
+  const [restaurante, setRestaurante] = useState<ItemProps>()
   const [cardapio, setCardapio] = useState<CardapioType[]>([])
   const [Selecionado, setSelecionado] = useState(false)
   const [ItemModal, setItemModal] = useState<CardapioType>()
@@ -51,17 +52,18 @@ function Perfil(){
     getItems()
   },[id])
 
-  if(cardapio.length == 0) {
+  if(cardapio.length <= 0) {
     return(
       <Carregando>
-        CARREGANDO ...
+        <img src={logo} alt="efood" />
+        <h2>CARREGANDO ...</h2>
       </Carregando>
     )
   }else{
     return(
       <PerfilContainer>
         <HeaderCart />
-        <BannerMenu banner={restaurante}/>
+        <BannerMenu capa={restaurante?.capa} tipo={restaurante?.tipo} titulo={restaurante?.titulo}/>
         <ItensContainer clicou={(e)=> selecionar(e)} listaItens={cardapio} />
         {Selecionado && (<ModalPerfil key={ItemModal?.id} nome={ItemModal?.nome} descricao={ItemModal?.descricao} foto={ItemModal?.foto} porcao={ItemModal?.porcao} preco={ItemModal?.preco}  clicou={()=> setSelecionado(false)}/>)}
         <Footer />

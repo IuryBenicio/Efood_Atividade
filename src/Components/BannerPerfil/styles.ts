@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 type Props = {
-  background: string
+  background?: string
 }
 
 export const ImgContainer = styled.div<Props>`

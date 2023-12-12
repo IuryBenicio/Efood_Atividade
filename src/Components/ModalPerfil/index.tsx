@@ -12,12 +12,12 @@ type Props = {
 
 const ModalPerfil = ({foto, descricao, nome, porcao, preco, clicou}: Props)=>{
 
-  const getPreco = (preco?: number)=> {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-  }).format(preco)
-  }
+  // const getPreco = (preco?: number)=> {
+  //   return new Intl.NumberFormat('pt-BR', {
+  //     style: 'currency',
+  //     currency: 'BRL'
+  // }).format(preco)
+  // }
 
   return(
     <ModalContainer>
@@ -31,7 +31,7 @@ const ModalPerfil = ({foto, descricao, nome, porcao, preco, clicou}: Props)=>{
               <p>{descricao}</p>
               <p>Serve: {porcao}</p>
             </div>
-            <button>Adicionar ao carrinho - {getPreco(preco)}</button>
+            <button>Adicionar ao carrinho - {preco}</button>
           </div>
         </div>
       </ContentContainer>
