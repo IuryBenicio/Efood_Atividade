@@ -1,5 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
+import { store } from './store/index.ts'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import Home from './Pages/Home/index.tsx'
 import { GlobalStyles } from './styles.ts'
@@ -18,7 +20,9 @@ const Rotas = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <GlobalStyles />
-    <RouterProvider router={Rotas} />
+    <Provider store={store}>
+      <GlobalStyles />
+      <RouterProvider router={Rotas} />
+    </Provider>
   </React.StrictMode>,
 )

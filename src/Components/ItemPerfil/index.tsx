@@ -1,32 +1,52 @@
-import { MouseEventHandler } from "react"
-import { ItemCardapio } from "./styles"
+import { MouseEventHandler } from 'react'
+import { ItemCardapio } from './styles'
+import { useDispatch } from 'react-redux'
+import { add } from '../../store/reducer/cart'
 
 export type Props = {
+  id: number
   foto: string
   nome: string
   descricao: string
+  preco: number
   clicou: MouseEventHandler
 }
 
-const Item = ({foto, nome, descricao, clicou}: Props)=>{
+const Item = ({ id, foto, nome, descricao, preco, clicou }: Props) => {
+  const dispatch = useDispatch()
 
-  const getDescricao = (descricao: string) =>{
-    if(descricao.length > 95) {
-      return descricao.slice (0, 165)
+  const getDescricao = (descricao: string) => {
+    if (descricao.length > 95) {
+      return descricao.slice(0, 165)
     }
     return descricao
   }
 
-  return(
+  function addItemOnCart() {
+    dispatch(
+      add({
+        id: id,
+        nome: nome,
+        descricao: descricao,
+        foto: foto,
+        preco: preco
+      })
+    )
+    // dispatch(open())
+  }
+
+  return (
     <>
-      <ItemCardapio onClick={clicou}>
+      <ItemCardapio>
         <div className="cardapio_content">
-          <div className="item_container">
+          <div className="item_container" onClick={clicou}>
             <img src={foto} alt={nome} />
             <h3>{nome}</h3>
-            <p>{getDescricao(descricao)} <a > ... ver mais</a></p>
+            <p>
+              {getDescricao(descricao)} <a> ... ver mais</a>
+            </p>
           </div>
-          <button>Adicionar ao carrinho</button>
+          <button onClick={() => addItemOnCart()}>Adicionar ao carrinho</button>
         </div>
       </ItemCardapio>
     </>

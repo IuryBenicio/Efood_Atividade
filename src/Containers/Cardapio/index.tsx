@@ -1,5 +1,5 @@
-import { ItensContainer as ItensContainerStyles } from "./styles"
-import Item from "../../Components/ItemPerfil"
+import { ItensContainer as ItensContainerStyles } from './styles'
+import Item from '../../Components/ItemPerfil'
 
 export type CardapioType = {
   foto: string
@@ -11,19 +11,29 @@ export type CardapioType = {
 }
 
 type Props = {
-  listaItens: CardapioType[]
-  clicou: (e: CardapioType)=> void
+  listaProdutos?: CardapioType[]
+  clicou: (e: CardapioType) => void
 }
 
-const ItensContainer = ({listaItens, clicou}: Props)=>{
-
-  return(
-    <ItensContainerStyles  className="container">
-      {listaItens.map((e)=>(
-        <Item clicou={()=>clicou(e)} key={e.id} nome={e.nome} descricao={e.descricao} foto={e.foto} />
-      ))}
-    </ItensContainerStyles>
-  )
+const ItensContainer = ({ listaProdutos, clicou }: Props) => {
+  if (listaProdutos) {
+    return (
+      <ItensContainerStyles className="container">
+        {listaProdutos.map((e) => (
+          <Item
+            id={e.id!}
+            preco={e.preco!}
+            key={e.id}
+            nome={e.nome}
+            descricao={e.descricao}
+            clicou={() => clicou(e)}
+            foto={e.foto}
+          />
+        ))}
+      </ItensContainerStyles>
+    )
+  }
+  return <h2>Carregando ...</h2>
 }
 
 export default ItensContainer

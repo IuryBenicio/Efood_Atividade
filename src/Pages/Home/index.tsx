@@ -1,12 +1,13 @@
 import Header from "../../Components/Header"
 import Restaurante from "../../Components/Restaurant"
 import Footer from "../../Components/Footer"
-import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { ProductContainer } from "./styles"
 import { CardapioType } from "../../Containers/Cardapio"
 import { Carregando } from "../../styles"
 import logo from '../../assets/images/logo.svg'
+import { useGetRestaurantesQuery } from "../../services/api"
+import { useEffect } from "react"
 
 export type Item = {
   id?: number
@@ -21,21 +22,13 @@ export type Item = {
 
 function Home(){
   const navigate = useNavigate()
-  const [itens, setItens] = useState<Item[]>([])
-
-  async function getItems(){
-    const response =
-    await fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-    .then(res => res.json())
-    .then(res => setItens(res))
-    return response
-  }
+  const { data: restaurantes } = useGetRestaurantesQuery()
 
   useEffect(()=>{
-    getItems()
+    console.log(restaurantes)
   },[])
 
-  if(itens.length <= 0){
+  if(!restaurantes){
     return(
       <Carregando>
         <img src={logo} alt="efood" />
@@ -43,14 +36,13 @@ function Home(){
       </Carregando>
     )
   }
-    else{
       return(
         <>
           <Header/>
           <ProductContainer>
             <div className="container">
               <ul>
-                  {itens.map(e=>(
+                  {restaurantes.map(e=>(
                     <li key={e.id} onClick={()=> navigate(`/Perfil/${e.id}`)}>
                         <Restaurante
                         avaliacao={e.avaliacao}
@@ -68,6 +60,5 @@ function Home(){
         </>
       )
     }
-}
 
 export default Home

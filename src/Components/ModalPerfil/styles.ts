@@ -58,6 +58,7 @@ export const ContentContainer = styled.div`
         padding: 4px 7px ;
         background-color: ${Cores.corFonteWhite1};
         color: ${Cores.corFonte1};
+        font-weight: 700;
         margin-top: 16px;
         border: none;
         cursor: pointer;
