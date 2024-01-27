@@ -17,7 +17,7 @@ const Item = ({ id, foto, nome, descricao, preco, clicou }: Props) => {
 
   const getDescricao = (descricao: string) => {
     if (descricao.length > 95) {
-      return descricao.slice(0, 165)
+      return descricao.slice(0, 150)
     }
     return descricao
   }

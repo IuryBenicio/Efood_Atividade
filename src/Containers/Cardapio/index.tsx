@@ -2,11 +2,11 @@ import { ItensContainer as ItensContainerStyles } from './styles'
 import Item from '../../Components/ItemPerfil'
 
 export type CardapioType = {
-  foto: string
+  foto?: string
   preco?: number
   id?: number
-  nome: string
-  descricao: string
+  nome?: string
+  descricao?: string
   porcao?: string
 }
 
@@ -24,10 +24,10 @@ const ItensContainer = ({ listaProdutos, clicou }: Props) => {
             id={e.id!}
             preco={e.preco!}
             key={e.id}
-            nome={e.nome}
-            descricao={e.descricao}
+            nome={e.nome!}
+            descricao={e.descricao!}
             clicou={() => clicou(e)}
-            foto={e.foto}
+            foto={e.foto!}
           />
         ))}
       </ItensContainerStyles>
