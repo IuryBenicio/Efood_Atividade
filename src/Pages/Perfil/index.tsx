@@ -7,9 +7,10 @@ import ModalPerfil from '../../Components/ModalPerfil'
 import CartModal from '../../Containers/ModalCart'
 import ItensContainer, { CardapioType } from '../../Containers/Cardapio'
 import { PerfilContainer } from './styles'
-import { Carregando } from '../../styles'
 import { useGetRestauranteQuery } from '../../services/api'
 import logo from '../../assets/images/logo.svg'
+import { Carregando } from '../../styles'
+import Loader from '../../Components/Loader'
 
 function Perfil() {
   const { id } = useParams()
@@ -22,17 +23,16 @@ function Perfil() {
   }
 
   /////////////////////////REQUISIÇÕES/////////////////////////
-  const { data: restaurante } = useGetRestauranteQuery(id!)
+  const { data: restaurante, isLoading } = useGetRestauranteQuery(id!)
 
-  if (!restaurante) {
+  if (isLoading) {
     return (
       <Carregando>
         <img src={logo} alt="efood" />
-        <h2>CARREGANDO ...</h2>
+        <Loader />
       </Carregando>
     )
   } else {
-    console.log(restaurante.cardapio)
     return (
       <PerfilContainer>
         <CartModal />

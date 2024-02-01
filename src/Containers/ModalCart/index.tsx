@@ -6,10 +6,12 @@ import {
   ContainerNumerosCartao,
   TextContainer,
   Button,
-  ContainerCheckout
+  ContainerCheckout,
+  NoItensText
 } from './styles'
 import { RootReducer } from '../../store'
 import {
+  ResetCart,
   UpdateTotalPrice,
   changeCartModal,
   close,
@@ -17,12 +19,15 @@ import {
 } from '../../store/reducer/cart'
 import CartItem from '../../Components/CartItem'
 import { usePurchaseMutation } from '../../services/api'
+import InputMask from 'react-input-mask'
+
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
 const CartModal = () => {
   const dispatch = useDispatch()
-  const [purchase, { isError, isSuccess, data }] = usePurchaseMutation()
+  const [purchase, { isError, isSuccess, data: dataResponse }] =
+    usePurchaseMutation()
   const { TotalPrice, items, isOpen, isCheckout } = useSelector(
     (state: RootReducer) => state.cart
   )
@@ -85,12 +90,10 @@ const CartModal = () => {
     }),
     onSubmit: (values) => {
       purchase({
-        products: [
-          {
-            id: 1,
-            price: 10
-          }
-        ],
+        products: items.map((item) => ({
+          id: item!.id as number,
+          price: item.preco as number
+        })),
         delivery: {
           receiver: values.NomeReceber,
           adress: {
@@ -114,6 +117,8 @@ const CartModal = () => {
         }
       })
       if (isSuccess) {
+        console.log(dataResponse)
+        dispatch(ResetCart())
         dispatch(changeCartModal('confirmation'))
       }
       if (isError) {
@@ -126,7 +131,11 @@ const CartModal = () => {
   ///////////////////////////////////////////////////////////////////////
 
   const ContinuarCompraEndereco = () => {
-    dispatch(changeCartModal('adress'))
+    if (items.length >= 1) {
+      dispatch(changeCartModal('adress'))
+    } else {
+      alert('adicione itens ao carrinho')
+    }
   }
 
   const getTotalPrice = () => {
@@ -161,219 +170,249 @@ const CartModal = () => {
     dispatch(close())
   }
 
+  function getError(fieldName: string) {
+    const estaAlterado = fieldName in form.touched
+    const estaInvalido = fieldName in form.errors
+    const borderRed = 'in_error'
+
+    if (estaAlterado && estaInvalido) return borderRed
+    return ''
+  }
   return (
     <CartContainer className={isOpen ? 'is_open' : ''}>
       <BackGround onClick={() => FechaModal()}></BackGround>
       <ModalCartContainer>
         <aside>
-          {isCheckout === 'order' && (
+          {items.length >= 1 ? (
             <>
-              <div className="itensContainer">
-                {items.map((e) => (
-                  <CartItem
-                    remove={() => removeItem(e.id!)}
-                    key={e.id}
-                    foto={e.foto!}
-                    nome={e.nome!}
-                    preco={e.preco}
-                  />
-                ))}
-              </div>
-              <div className="valor">
-                <p>Valor total</p>
-                <span>
-                  {getPreco(getTotalPrice())
-                    ? getPreco(getTotalPrice())
-                    : 'R$ 0'}
-                </span>
-              </div>
-              <Button onClick={() => ContinuarCompraEndereco()}>
-                Continuar com a entrega
-              </Button>
+              {isCheckout === 'order' && (
+                <>
+                  <div className="itensContainer">
+                    {items.map((e) => (
+                      <CartItem
+                        remove={() => removeItem(e.id!)}
+                        key={e.id}
+                        foto={e.foto!}
+                        nome={e.nome!}
+                        preco={e.preco}
+                      />
+                    ))}
+                  </div>
+                  <div className="valor">
+                    <p>Valor total</p>
+                    <span>
+                      {getPreco(getTotalPrice())
+                        ? getPreco(getTotalPrice())
+                        : 'R$ 0'}
+                    </span>
+                  </div>
+                  <Button onClick={() => ContinuarCompraEndereco()}>
+                    Continuar com a entrega
+                  </Button>
+                </>
+              )}
+              {isCheckout === 'adress' && (
+                <ContainerCheckout>
+                  <p>Entrega</p>
+                  <form>
+                    <label htmlFor="NomeReceber">
+                      <span>Quem irá receber</span>
+                      <input
+                        type="text"
+                        id="NomeReceber"
+                        name="NomeReceber"
+                        onBlur={form.handleBlur}
+                        onChange={form.handleChange}
+                        value={form.values.NomeReceber}
+                        className={getError('NomeReceber')}
+                      />
+                    </label>
+                    <label htmlFor="Endereco">
+                      <span>Endereço</span>
+                      <input
+                        type="text"
+                        id="Endereco"
+                        name="Endereco"
+                        onBlur={form.handleBlur}
+                        onChange={form.handleChange}
+                        value={form.values.Endereco}
+                        className={getError('Endereco')}
+                      />
+                    </label>
+                    <label htmlFor="CidadeEndereco">
+                      <span>Cidade</span>
+                      <input
+                        type="text"
+                        id="CidadeEndereco"
+                        name="CidadeEndereco"
+                        onBlur={form.handleBlur}
+                        onChange={form.handleChange}
+                        value={form.values.CidadeEndereco}
+                        className={getError('CidadeEndereco')}
+                      />
+                    </label>
+                    <div className="Input-Flex-50">
+                      <label htmlFor="CepEndereco">
+                        <span>CEP</span>
+                        <InputMask
+                          type="text"
+                          id="CepEndereco"
+                          name="CepEndereco"
+                          onBlur={form.handleBlur}
+                          onChange={form.handleChange}
+                          value={form.values.CepEndereco}
+                          className={getError('CepEndereco')}
+                          mask="99999-999"
+                        />
+                      </label>
+                      <label htmlFor="NumeroEndereco">
+                        <span>Número</span>
+                        <input
+                          type="text"
+                          id="NumeroEndereco"
+                          name="NumeroEndereco"
+                          onBlur={form.handleBlur}
+                          onChange={form.handleChange}
+                          value={form.values.NumeroEndereco}
+                          className={getError('NumeroEndereco')}
+                        />
+                      </label>
+                    </div>
+                    <label htmlFor="ComplementoEndereco">
+                      <span>Complemento (opcional)</span>
+                      <input
+                        type="text"
+                        id="ComplementoEndereco"
+                        name="ComplementoEndereco"
+                        onBlur={form.handleBlur}
+                        onChange={form.handleChange}
+                        value={form.values.ComplementoEndereco}
+                        className={getError('ComplementoEndereco')}
+                      />
+                    </label>
+                    <div className="Buttons">
+                      <Button
+                        onClick={() => dispatch(changeCartModal('payment'))}
+                      >
+                        Continuar pagamento
+                      </Button>
+                      <Button onClick={() => RetornaAoCarrinho()}>
+                        Voltar para o carrinho
+                      </Button>
+                    </div>
+                  </form>
+                </ContainerCheckout>
+              )}
+              {isCheckout === 'payment' && (
+                <ContainerCheckout>
+                  <p>Pagamento - Valor a pagar {getPreco(TotalPrice)}</p>
+                  <form onSubmit={form.handleSubmit}>
+                    <label htmlFor="NomeNoCartao">
+                      <span>Nome no cartão</span>
+                      <input
+                        type="text"
+                        id="NomeNoCartao"
+                        name="NomeNoCartao"
+                        onBlur={form.handleBlur}
+                        onChange={form.handleChange}
+                        value={form.values.NomeNoCartao}
+                        className={getError('NomeNoCartao')}
+                      />
+                    </label>
+                    <ContainerNumerosCartao className="NumerosCartao display-flex">
+                      <label htmlFor="NumeroDoCartao">
+                        <span>Numero do cartão</span>
+                        <input
+                          type="text"
+                          id="NumeroDoCartao"
+                          name="NumeroDoCartao"
+                          onBlur={form.handleBlur}
+                          onChange={form.handleChange}
+                          value={form.values.NumeroDoCartao}
+                          className={getError('NumeroDoCartao')}
+                        />
+                      </label>
+                      <label htmlFor="CVVCartao">
+                        <span>CVV</span>
+                        <InputMask
+                          mask="999"
+                          type="text"
+                          id="CVVCartao"
+                          name="CVVCartao"
+                          onBlur={form.handleBlur}
+                          onChange={form.handleChange}
+                          value={form.values.CVVCartao}
+                          className={getError('CVVCartao')}
+                        />
+                      </label>
+                    </ContainerNumerosCartao>
+                    <div className="Input-Flex-50">
+                      <label htmlFor="MesVencimentoCartao">
+                        <span>Mês de vencimento</span>
+                        <InputMask
+                          mask="99"
+                          type="text"
+                          id="MesVencimentoCartao"
+                          name="MesVencimentoCartao"
+                          onBlur={form.handleBlur}
+                          onChange={form.handleChange}
+                          value={form.values.MesVencimentoCartao}
+                          className={getError('MesVencimentoCartao')}
+                        />
+                      </label>
+                      <label htmlFor="AnoVencimentoCartao">
+                        <span>Ano de vencimento</span>
+                        <InputMask
+                          mask="99"
+                          type="text"
+                          id="AnoVencimentoCartao"
+                          name="AnoVencimentoCartao"
+                          onBlur={form.handleBlur}
+                          onChange={form.handleChange}
+                          value={form.values.AnoVencimentoCartao}
+                          className={getError('AnoVencimentoCartao')}
+                        />
+                      </label>
+                    </div>
+                    <div className="Buttons">
+                      <Button type="submit">Finalizar pagamento</Button>
+                      <Button onClick={() => RetornaAoCarrinho()}>
+                        Voltar para a edição de endereço
+                      </Button>
+                    </div>
+                  </form>
+                  r
+                </ContainerCheckout>
+              )}
+              {isCheckout === 'confirmation' && (
+                <ContainerCheckout>
+                  <p>Pedido realizado - {dataResponse?.orderId} </p>
+                  <TextContainer>
+                    <p>
+                      Estamos felizes em informar que seu pedido já está em
+                      processo de preparação e, em breve, será entregue no
+                      endereço fornecido.
+                    </p>
+                    <p>
+                      Gostaríamos de ressaltar que nossos entregadores não estão
+                      autorizados a realizar cobranças extras.{' '}
+                    </p>
+                    <p>
+                      Lembre-se da importância de higienizar as mãos após o
+                      recebimento do pedido, garantindo assim sua segurança e
+                      bem-estar durante a refeição.
+                    </p>
+                    <p>
+                      Esperamos que desfrute de uma deliciosa e agradável
+                      experiência gastronômica. Bom apetite!
+                    </p>
+                  </TextContainer>
+                  <Button onClick={() => ReturnCart()}>Concluir</Button>
+                </ContainerCheckout>
+              )}
             </>
-          )}
-          {isCheckout === 'adress' && (
-            <ContainerCheckout>
-              <p>Entrega</p>
-              <form>
-                <label htmlFor="NomeReceber">
-                  <span>Quem irá receber</span>
-                  <input
-                    type="text"
-                    id="NomeReceber"
-                    name="NomeReceber"
-                    onBlur={form.handleBlur}
-                    onChange={form.handleChange}
-                    value={form.values.NomeReceber}
-                  />
-                </label>
-                <label htmlFor="Endereco">
-                  <span>Endereço</span>
-                  <input
-                    type="text"
-                    id="Endereco"
-                    name="Endereco"
-                    onBlur={form.handleBlur}
-                    onChange={form.handleChange}
-                    value={form.values.Endereco}
-                  />
-                </label>
-                <label htmlFor="CidadeEndereco">
-                  <span>Cidade</span>
-                  <input
-                    type="text"
-                    id="CidadeEndereco"
-                    name="CidadeEndereco"
-                    onBlur={form.handleBlur}
-                    onChange={form.handleChange}
-                    value={form.values.CidadeEndereco}
-                  />
-                </label>
-                <div className="Input-Flex-50">
-                  <label htmlFor="CepEndereco">
-                    <span>CEP</span>
-                    <input
-                      type="text"
-                      id="CepEndereco"
-                      name="CepEndereco"
-                      onBlur={form.handleBlur}
-                      onChange={form.handleChange}
-                      value={form.values.CepEndereco}
-                    />
-                  </label>
-                  <label htmlFor="NumeroEndereco">
-                    <span>Número</span>
-                    <input
-                      type="text"
-                      id="NumeroEndereco"
-                      name="NumeroEndereco"
-                      onBlur={form.handleBlur}
-                      onChange={form.handleChange}
-                      value={form.values.NumeroEndereco}
-                    />
-                  </label>
-                </div>
-                <label htmlFor="ComplementoEndereco">
-                  <span>Complemento (opcional)</span>
-                  <input
-                    type="text"
-                    id="ComplementoEndereco"
-                    name="ComplementoEndereco"
-                    onBlur={form.handleBlur}
-                    onChange={form.handleChange}
-                    value={form.values.ComplementoEndereco}
-                  />
-                </label>
-                <div className="Buttons">
-                  <Button onClick={() => dispatch(changeCartModal('payment'))}>
-                    Continuar pagamento
-                  </Button>
-                  <Button onClick={() => RetornaAoCarrinho()}>
-                    Voltar para o carrinho
-                  </Button>
-                </div>
-              </form>
-            </ContainerCheckout>
-          )}
-          {isCheckout === 'payment' && (
-            <ContainerCheckout>
-              <p>Pagamento - Valor a pagar {getPreco(TotalPrice)}</p>
-              <form onSubmit={form.handleSubmit}>
-                <label htmlFor="NomeNoCartao">
-                  <span>Nome no cartão</span>
-                  <input
-                    type="text"
-                    className={form.errors.NomeNoCartao}
-                    id="NomeNoCartao"
-                    name="NomeNoCartao"
-                    onBlur={form.handleBlur}
-                    onChange={form.handleChange}
-                    value={form.values.NomeNoCartao}
-                  />
-                </label>
-                <ContainerNumerosCartao className="NumerosCartao display-flex">
-                  <label htmlFor="NumeroDoCartao">
-                    <span>Numero do cartão</span>
-                    <input
-                      type="text"
-                      id="NumeroDoCartao"
-                      name="NumeroDoCartao"
-                      onBlur={form.handleBlur}
-                      onChange={form.handleChange}
-                      value={form.values.NumeroDoCartao}
-                    />
-                  </label>
-                  <label htmlFor="CVVCartao">
-                    <span>CVV</span>
-                    <input
-                      type="text"
-                      id="CVVCartao"
-                      name="CVVCartao"
-                      onBlur={form.handleBlur}
-                      onChange={form.handleChange}
-                      value={form.values.CVVCartao}
-                    />
-                  </label>
-                </ContainerNumerosCartao>
-                <div className="Input-Flex-50">
-                  <label htmlFor="MesVencimentoCartao">
-                    <span>Mês de vencimento</span>
-                    <input
-                      type="text"
-                      id="MesVencimentoCartao"
-                      name="MesVencimentoCartao"
-                      onBlur={form.handleBlur}
-                      onChange={form.handleChange}
-                      value={form.values.MesVencimentoCartao}
-                    />
-                  </label>
-                  <label htmlFor="AnoVencimentoCartao">
-                    <span>Ano de vencimento</span>
-                    <input
-                      type="text"
-                      id="AnoVencimentoCartao"
-                      name="AnoVencimentoCartao"
-                      onBlur={form.handleBlur}
-                      onChange={form.handleChange}
-                      value={form.values.AnoVencimentoCartao}
-                    />
-                  </label>
-                </div>
-                <div className="Buttons">
-                  <Button type="submit">Finalizar pagamento</Button>
-                  <Button onClick={() => RetornaAoCarrinho()}>
-                    Voltar para a edição de endereço
-                  </Button>
-                </div>
-              </form>
-              r
-            </ContainerCheckout>
-          )}
-          {isCheckout === 'confirmation' && (
-            <ContainerCheckout>
-              <p>Pedido realizado - {data.orderId}</p>
-              <TextContainer>
-                <p>
-                  Estamos felizes em informar que seu pedido já está em processo
-                  de preparação e, em breve, será entregue no endereço
-                  fornecido.
-                </p>
-                <p>
-                  Gostaríamos de ressaltar que nossos entregadores não estão
-                  autorizados a realizar cobranças extras.{' '}
-                </p>
-                <p>
-                  Lembre-se da importância de higienizar as mãos após o
-                  recebimento do pedido, garantindo assim sua segurança e
-                  bem-estar durante a refeição.
-                </p>
-                <p>
-                  Esperamos que desfrute de uma deliciosa e agradável
-                  experiência gastronômica. Bom apetite!
-                </p>
-              </TextContainer>
-              <Button onClick={() => ReturnCart()}>Concluir</Button>
-            </ContainerCheckout>
+          ) : (
+            <NoItensText>Nenhum item no carrinho</NoItensText>
           )}
         </aside>
       </ModalCartContainer>

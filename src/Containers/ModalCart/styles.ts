@@ -13,6 +13,14 @@ export const Button = styled.button`
   cursor: pointer;
 `
 
+export const NoItensText = styled.p`
+  color: ${Cores.corFonteWhite1};
+  text-align: center;
+  font-weight: normal;
+  font-size: 18px;
+  margin-top: 40px;
+`
+
 export const ContainerCheckout = styled.div`
   input {
     background-color: ${Cores.corFonteWhite1};
