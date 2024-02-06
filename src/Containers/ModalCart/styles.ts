@@ -98,13 +98,13 @@ export const BackGround = styled.div`
   position: absolute;
   background: rgba(0, 0, 0, 0.8);
   height: 100%;
-  width: 100vw;
+  width: 100%;
 `
 
 export const CartContainer = styled.div`
   position: absolute;
   height: 100%;
-  width: 100vw;
+  width: 100%;
   display: none;
   &.is_open {
     display: flex;
