@@ -23,6 +23,7 @@ import InputMask from 'react-input-mask'
 
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
+import { useEffect } from 'react'
 
 const CartModal = () => {
   const dispatch = useDispatch()
@@ -116,15 +117,17 @@ const CartModal = () => {
           }
         }
       })
-      if (isSuccess) {
-        dispatch(changeCartModal('confirmation'))
-      }
-      if (isError) {
-        alert('erro ' + isError)
-        console.log(isError)
-      }
     }
   })
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(changeCartModal('confirmation'))
+    }
+    if (isError) {
+      alert('erro ' + isError)
+      console.log(isError)
+    }
+  }, [form])
 
   ///////////////////////////////////////////////////////////////////////
 
