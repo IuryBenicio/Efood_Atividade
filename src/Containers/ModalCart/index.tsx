@@ -38,14 +38,14 @@ const CartModal = () => {
       Endereco: '',
       CidadeEndereco: '',
       CepEndereco: '',
-      NumeroEndereco: 0,
+      NumeroEndereco: '',
       ComplementoEndereco: '',
       //////////////////////////////////
       NomeNoCartao: '',
       NumeroDoCartao: '',
-      CVVCartao: 0,
-      MesVencimentoCartao: 0,
-      AnoVencimentoCartao: 0
+      CVVCartao: '',
+      MesVencimentoCartao: '',
+      AnoVencimentoCartao: ''
     },
     validationSchema: Yup.object({
       NomeReceber: Yup.string()
@@ -90,7 +90,7 @@ const CartModal = () => {
     }),
     onSubmit: (values) => {
       purchase({
-        products: items.map((item) => ({
+        products: items.map((item: CardapioType) => ({
           id: item!.id as number,
           price: item.preco as number
         })),
@@ -99,7 +99,7 @@ const CartModal = () => {
           adress: {
             description: values.Endereco,
             city: values.CidadeEndereco,
-            number: values.NumeroEndereco,
+            number: parseInt(values.NumeroEndereco),
             zipCode: values.CepEndereco,
             complement: values.ComplementoEndereco
           }
@@ -108,17 +108,15 @@ const CartModal = () => {
           card: {
             name: values.NomeNoCartao,
             number: values.NumeroDoCartao,
-            code: values.CVVCartao,
+            code: parseInt(values.CVVCartao),
             expires: {
-              month: values.MesVencimentoCartao,
-              year: values.AnoVencimentoCartao
+              month: parseInt(values.MesVencimentoCartao),
+              year: parseInt(values.AnoVencimentoCartao)
             }
           }
         }
       })
       if (isSuccess) {
-        console.log(dataResponse)
-        dispatch(ResetCart())
         dispatch(changeCartModal('confirmation'))
       }
       if (isError) {
@@ -139,7 +137,7 @@ const CartModal = () => {
   }
 
   const getTotalPrice = () => {
-    return items.reduce((acumulador, valorAtual) => {
+    return items.reduce((acumulador: number, valorAtual: CardapioType) => {
       return (acumulador += valorAtual.preco!)
     }, 0)
   }
@@ -164,6 +162,7 @@ const CartModal = () => {
 
   const ReturnCart = () => {
     dispatch(changeCartModal('order'))
+    dispatch(ResetCart())
   }
 
   function FechaModal() {
@@ -188,7 +187,7 @@ const CartModal = () => {
               {isCheckout === 'order' && (
                 <>
                   <div className="itensContainer">
-                    {items.map((e) => (
+                    {items.map((e: CardapioType) => (
                       <CartItem
                         remove={() => removeItem(e.id!)}
                         key={e.id}
@@ -381,7 +380,6 @@ const CartModal = () => {
                       </Button>
                     </div>
                   </form>
-                  r
                 </ContainerCheckout>
               )}
               {isCheckout === 'confirmation' && (
