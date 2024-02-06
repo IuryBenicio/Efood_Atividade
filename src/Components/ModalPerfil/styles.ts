@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Cores } from "../../styles";
+import styled from 'styled-components'
+import { Cores } from '../../GlobalStyles'
 
 export const CloseImg = styled.img`
   cursor: pointer;
@@ -17,7 +17,7 @@ export const ModalContainer = styled.div`
   position: absolute;
   top: 0;
   width: 100vw;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0, 0, 0, 0.8);
   height: 100%;
   display: flex;
   justify-content: center;
@@ -25,37 +25,37 @@ export const ModalContainer = styled.div`
 export const ContentContainer = styled.div`
   position: sticky;
   top: 30vh;
-  .containerModal{
+  .containerModal {
     position: relative;
     display: flex;
     padding: 32px;
-    img{
+    img {
       width: 280px;
       height: 280px;
       object-fit: cover;
     }
-    .text{
-      .description{
+    .text {
+      .description {
         height: 176px;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        p{
-        color: ${Cores.corFonteWhite1};
-        font-size: 14px;
-        font-weight: 400;
-        line-height: 22px;
+        p {
+          color: ${Cores.corFonteWhite1};
+          font-size: 14px;
+          font-weight: 400;
+          line-height: 22px;
+        }
       }
-      }
-      h3{
+      h3 {
         color: ${Cores.corFonteWhite1};
         font-size: 18px;
         font-weight: 900;
         margin-bottom: 16px;
       }
 
-      button{
-        padding: 4px 7px ;
+      button {
+        padding: 4px 7px;
         background-color: ${Cores.corFonteWhite1};
         color: ${Cores.corFonte1};
         font-weight: 700;

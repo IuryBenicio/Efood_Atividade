@@ -1,6 +1,5 @@
-import styled from "styled-components";
-import { Cores } from "../../styles";
-
+import styled from 'styled-components'
+import { Cores } from '../../GlobalStyles'
 
 export const ItensContainer = styled.section`
   display: grid;
@@ -19,5 +18,3 @@ export const ContainerModal = styled.div`
   height: 100vh;
   width: 100vw;
 `
-
-

@@ -1,5 +1,5 @@
-import styled from "styled-components";
-import { Cores } from "../../styles";
+import styled from 'styled-components'
+import { Cores } from '../../GlobalStyles'
 
 export const Tags = styled.div`
   position: absolute;
@@ -11,18 +11,18 @@ export const Tags = styled.div`
 export const ProductContainer = styled.section`
   padding: 80px 0;
   background-color: ${Cores.background};
-  ul{
+  ul {
     display: grid;
     grid-template-columns: 1fr 1fr;
     row-gap: 48px;
     column-gap: 80px;
-    li{
-    display: inline-block;
-      .imgContainer{
+    li {
+      display: inline-block;
+      .imgContainer {
         position: relative;
         height: 217px;
       }
-      p{
+      p {
         padding: 16px 0;
         font-size: 14px;
         font-weight: 400;
@@ -48,9 +48,9 @@ export const ContainerTexT = styled.div`
   border-right: 1px solid ${Cores.corFonte1};
   border-bottom: 1px solid ${Cores.corFonte1};
   border-left: 1px solid ${Cores.corFonte1};
-  background-color: #FFF;
+  background-color: #fff;
   padding: 8px;
-  p{
+  p {
     padding: 16px 0;
     font-size: 14px;
     font-weight: 400;
@@ -60,12 +60,12 @@ export const ContainerTexT = styled.div`
 `
 
 export const TitleStars = styled.div`
-  .stars{
+  .stars {
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  h3{
+  h3 {
     font-size: 18px;
     font-weight: 700;
   }

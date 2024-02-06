@@ -1,5 +1,5 @@
 import { PulseLoader } from 'react-spinners'
-import { Cores } from '../../styles'
+import { Cores } from '../../GlobalStyles'
 import { Container } from './styles'
 
 const Loader = () => (

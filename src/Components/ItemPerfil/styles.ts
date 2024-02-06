@@ -1,44 +1,44 @@
-import styled from "styled-components";
-import { Cores } from "../../styles";
+import styled from 'styled-components'
+import { Cores } from '../../GlobalStyles'
 
 export const ItemCardapio = styled.div`
   width: 320px;
   height: auto;
   background: ${Cores.corFonte1};
-  .cardapio_content{
-    .item_container{
+  .cardapio_content {
+    .item_container {
       cursor: pointer;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      a{
+      a {
         cursor: pointer;
         font-weight: bold;
       }
-      a:hover{
+      a:hover {
         color: black;
       }
     }
     padding: 8px;
-    img{
+    img {
       width: 304px;
       height: 167px;
       object-fit: cover;
     }
-    h3{
+    h3 {
       color: ${Cores.corFonteWhite1};
       font-size: 16px;
       font-weight: 900;
       margin-top: 8px;
     }
-    p{
+    p {
       margin: 8px 0;
       color: ${Cores.corFonteWhite1};
       font-size: 14px;
       font-weight: 400;
       line-height: 22px;
     }
-    button{
+    button {
       padding: 4px 0;
       border: none;
       width: 100%;

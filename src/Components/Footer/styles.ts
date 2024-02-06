@@ -1,8 +1,8 @@
-import styled from "styled-components";
-import { Cores } from "../../styles";
+import styled from 'styled-components'
+import { Cores } from '../../GlobalStyles'
 
 export const FooterSection = styled.footer`
-  width: 100vw;
+  width: 100%;
   padding: 40px 0;
   background-color: ${Cores.backgroundFooter};
 `
@@ -13,13 +13,13 @@ export const SocialMedia = styled.div`
   display: flex;
   align-items: center;
   margin-top: 30px;
-  img{
+  img {
     margin: 0 4px;
   }
 `
 
 export const FContainer = styled.div`
-  p{
+  p {
     margin-top: 80px;
     color: ${Cores.corFonte1};
     font-family: Roboto;
@@ -29,4 +29,7 @@ export const FContainer = styled.div`
   text-align: center;
   margin: 0 auto;
   width: 480px;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `

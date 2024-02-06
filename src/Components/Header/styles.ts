@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 import backgroundImg from '../../assets/images/Vector.svg'
-import { Cores } from '../../styles'
+import { Cores, breakpoints } from '../../GlobalStyles'
 
 export const HeaderContainer = styled.header`
-  width: 100vw;
+  width: 100%;
   .HContainer {
     margin: 0 auto;
     width: 539px;
@@ -21,5 +21,14 @@ export const HeaderContainer = styled.header`
     font-family: Roboto;
     font-size: 36px;
     font-weight: 900;
+  }
+  @media (max-width: ${breakpoints.tablet}) {
+    .HContainer {
+      width: 80%;
+    }
+    h2 {
+      font-size: 20px;
+      margin-top: 28px;
+    }
   }
 `

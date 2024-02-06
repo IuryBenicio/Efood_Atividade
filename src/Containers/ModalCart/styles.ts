@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Cores } from '../../styles'
+import { Cores } from '../../GlobalStyles'
 
 export const Button = styled.button`
   width: 100%;

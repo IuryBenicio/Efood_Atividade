@@ -9,7 +9,7 @@ import ItensContainer from '../../Containers/Cardapio'
 import { PerfilContainer } from './styles'
 import { useGetRestauranteQuery } from '../../services/api'
 import logo from '../../assets/images/logo.svg'
-import { Carregando } from '../../styles'
+import { Carregando } from '../../GlobalStyles'
 import Loader from '../../Components/Loader'
 
 function Perfil() {

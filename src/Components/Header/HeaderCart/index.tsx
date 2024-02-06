@@ -24,7 +24,7 @@ const HeaderCart = () => {
         <TextHeader onClick={() => NavigateHome()}>Restaurantes</TextHeader>
         <img onClick={() => NavigateHome()} src={Logo} alt="efood" />
         <TextHeader onClick={() => openCartModal()}>
-          {items.length} produto(s) no carrinho{' '}
+          {items.length} produto(s) <span>no carrinho</span>{' '}
         </TextHeader>
       </div>
     </HeaderContainer>
