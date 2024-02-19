@@ -23,10 +23,12 @@ import InputMask from 'react-input-mask'
 
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import ErrorModal from './ErrorModal'
 
 const CartModal = () => {
   const dispatch = useDispatch()
+  const [errorModal, setErrorModal] = useState(false)
   const [purchase, { isError, isSuccess, data: dataResponse }] =
     usePurchaseMutation()
   const { TotalPrice, items, isOpen, isCheckout } = useSelector(
@@ -180,9 +182,29 @@ const CartModal = () => {
     if (estaAlterado && estaInvalido) return borderRed
     return ''
   }
+
+  function ConfirmForm(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault()
+    if (
+      form.values.NomeReceber.length >= 5 &&
+      form.values.CidadeEndereco.length >= 1 &&
+      form.values.CepEndereco.length >= 8 &&
+      form.values.NumeroEndereco.length >= 1 &&
+      form.values.Endereco.length >= 1
+    ) {
+      dispatch(changeCartModal('payment'))
+    } else {
+      setErrorModal(true)
+      setTimeout(() => {
+        setErrorModal(false)
+      }, 2000)
+    }
+  }
+
   return (
     <CartContainer className={isOpen ? 'is_open' : ''}>
       <BackGround onClick={() => FechaModal()}></BackGround>
+      {errorModal && <ErrorModal />}
       <ModalCartContainer>
         <aside>
           {items.length >= 1 ? (
@@ -216,7 +238,7 @@ const CartModal = () => {
               {isCheckout === 'adress' && (
                 <ContainerCheckout>
                   <p>Entrega</p>
-                  <form>
+                  <form onSubmit={ConfirmForm}>
                     <label htmlFor="NomeReceber">
                       <span>Quem irá receber</span>
                       <input
@@ -293,11 +315,7 @@ const CartModal = () => {
                       />
                     </label>
                     <div className="Buttons">
-                      <Button
-                        onClick={() => dispatch(changeCartModal('payment'))}
-                      >
-                        Continuar pagamento
-                      </Button>
+                      <Button type="submit">Continuar pagamento</Button>
                       <Button onClick={() => RetornaAoCarrinho()}>
                         Voltar para o carrinho
                       </Button>
@@ -378,7 +396,9 @@ const CartModal = () => {
                     </div>
                     <div className="Buttons">
                       <Button type="submit">Finalizar pagamento</Button>
-                      <Button onClick={() => RetornaAoCarrinho()}>
+                      <Button
+                        onClick={() => dispatch(changeCartModal('adress'))}
+                      >
                         Voltar para a edição de endereço
                       </Button>
                     </div>

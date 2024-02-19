@@ -33,6 +33,9 @@ export const ContainerCheckout = styled.div`
     line-height: normal;
     padding: 8px;
   }
+  input:focus {
+    outline: none;
+  }
   .in_error {
     border: 4px solid red;
   }
@@ -47,9 +50,10 @@ export const ContainerCheckout = styled.div`
     label {
       span {
         color: ${Cores.corFonteWhite1};
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 700;
         margin-bottom: 16px;
+        line-height: 16.41px;
       }
       input {
         width: 100%;
